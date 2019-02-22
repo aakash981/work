@@ -1,0 +1,130 @@
+  
+using System;
+public class Program
+{
+
+    public static void Main(string[] args) 
+    {
+        int a;
+        string c_name, c_country, c_skillset;
+       
+           
+        Console.WriteLine("Enter the number of players");
+        a=Convert.ToInt32(Console.ReadLine());
+        string[] name = new string[a];
+        string[] country = new string[a];
+        string[] skillset = new string[a];
+        
+
+        Console.WriteLine("Do you know the details of the captain? Type Yes / No");
+        string str = Console.ReadLine();
+
+
+        if (str == "Yes")
+        {
+            Console.WriteLine("Enter name of the captain");
+            c_name = Console.ReadLine();
+            Console.WriteLine("Enter country of the captain");
+            c_country = Console.ReadLine();
+            Console.WriteLine("Enter skillset of the captain");
+            c_skillset = Console.ReadLine();
+        }
+        else
+        {
+            c_name = null; c_country = null; c_skillset = null; 
+
+        }
+        for (int i = 0; i < a; i++)
+        {
+            Console.WriteLine("Enter name of player "+(i+1));
+            name[i] = Console.ReadLine();
+            Console.WriteLine("Enter country of player " + (i + 1));
+            country[i] = Console.ReadLine();
+            Console.WriteLine("Enter skillset of player " + (i + 1));
+            skillset[i] = Console.ReadLine();         
+        }
+      
+            Player p = new Player(c_name, c_country, c_skillset);
+            PlayerBO pbo = new PlayerBO();
+            pbo.DisplayPlayerDetails(p);
+            Console.WriteLine("Player Details");
+            for (int i = 0; i < a; i++)
+            {
+                Console.WriteLine(name[i]+", "+country[i]+", "+skillset[i]);
+        
+            }
+            Console.ReadKey();
+
+       
+	}
+}
+
+
+
+
+
+
+
+
+
+  
+using System;
+public class PlayerBO
+{
+    public void DisplayPlayerDetails(Player player)
+    {
+        try
+        {
+            if (player.Name == null)
+                throw new NullReferenceException();
+            else
+                Console.WriteLine(player.Name + ", " + player.Country + ", " + player.Skill);
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine("Exception Occured : "+(e.GetType().Name));
+            Console.WriteLine("Captain details not available");
+        }
+        
+    }
+}
+
+
+
+
+  
+using System;
+public class Player 
+{
+    private string _name,_country,_skill;
+	
+    public Player()
+	{
+	}
+	public Player(string name, string country, string skill)
+	{
+		this._name = name;
+		this._country = country;
+		this._skill = skill;
+	}
+	        public string Name
+	    {
+	 
+	        get { return this._name; }
+	        set { this._name = value; }
+	    }
+	    	public string Country
+	    {
+	 
+	        get { return this._country; }
+	        set { this._country = value; }
+	    }
+	    	public string Skill
+	    {
+	 
+	        get { return this._skill; }
+	        set { this._skill = value; }
+	    }
+
+}
+
